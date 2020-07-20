@@ -1,0 +1,187 @@
+== SQL Sorguları
+
+[source, sql]
+----
+SELECT * FROM ShopApp.Products
+----
+
+[source, sql]
+----
+SELECT Name FROM ShopApp.Products
+----
+
+[source, sql]
+----
+SELECT Name, Price FROM ShopApp.Products
+----
+
+[source, sql]
+----
+SELECT Name AS "Ürün adi", Price AS "Fiyati" FROM ShopApp.Products
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Id = 1
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where  Price = 2000
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Price > 2000
+----
+
+**AND ve OR kullanımı**
+[source, sql]
+----
+select Name as "ürün ismi", Price as fiyati from ShopApp.Products where Price >=200 and Price < 4000
+----
+
+[source, sql]
+----
+select Name as "ürün ismi", Price as fiyati from ShopApp.Products where Id = 1 or Id = 1
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name = 'samsung s5' and (Price = 2000 or Price = 3000)
+----
+
+**NOT kullanımı**
+[source, sql]
+----
+select * from ShopApp.Products where Name != 'samsung s5'
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where NOT Name = 'samsung s5'
+----
+
+**BETWEEN kullanımı**
+[source, sql]
+----
+select * from ShopApp.Products where Price between 2000 and 4000 -- uç rakamlar dahil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Price between 2000 and 4000 -- uç rakamlar dahil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Id not between 1 and 4 -- uç rakamlar dahil
+----
+
+**IN kullanımı**
+[source, sql]
+----
+select * from ShopApp.Products where urun in ('tablet','bilgisayar')
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where urun not in ('bilgisayar')
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Id not in (1,2)
+----
+
+**LIKE kullanımı ---> içinde bir kelime geçen**
+
+[source, sql]
+----
+select * from ShopApp.Products where Name like  '%samsung%'       -- başnda sonunda ne olduğu önemli değil içinde samsung geçsin
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name like  '%d'              -- sonu d ile biten, başnda ne olduğu önemli değil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name like  'S%'              -- Sile başlayan kaytlar, sonrasnda ne olduğu önemli değil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name like  '_a%'             -- ikinci karakteri a olsun, sonras önemli değil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name like  'S_d%'            -- S ile başlasn, ikinci karakter önemli değil, üçüncü karakter d olsun, sonras önemli değil
+----
+
+[source, sql]
+----
+select * from ShopApp.Products where Name not like  'ipad'           -- içinde iphone geçmeyen sorgu gelir
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+-- 
+-- 
+-- 
+
