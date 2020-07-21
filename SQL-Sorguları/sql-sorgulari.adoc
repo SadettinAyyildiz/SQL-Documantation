@@ -1,5 +1,9 @@
 == SQL Sorguları
 
+Sorgular için oluşturulmuş örnek database:
+
+image::/Users/sadettinayyildiz/Documents/GitHub/SQL-Documantation/sql-documantation-database-1.png[]
+
 [source, sql]
 ----
 SELECT * FROM ShopApp.Products
@@ -43,7 +47,7 @@ select Name as "ürün ismi", Price as fiyati from ShopApp.Products where Price 
 
 [source, sql]
 ----
-select Name as "ürün ismi", Price as fiyati from ShopApp.Products where Id = 1 or Id = 1
+select Name as "ürün ismi", Price as fiyati from ShopApp.Products where Id = 1 or Id = 2
 ----
 
 [source, sql]
@@ -94,7 +98,7 @@ select * from ShopApp.Products where urun not in ('bilgisayar')
 select * from ShopApp.Products where Id not in (1,2)
 ----
 
-**LIKE kullanımı ---> içinde bir kelime geçen**
+**LIKE kullanımı -> içinde bir kelime geçen**
 
 [source, sql]
 ----
@@ -128,23 +132,107 @@ select * from ShopApp.Products where Name not like  'ipad'           -- içinde 
 
 [source, sql]
 ----
-
+select * from ShopApp.Products where Name not like  'ipad' and Price > 4000  
 ----
 
 [source, sql]
 ----
+select * from ShopApp.Products where Name not like  'ipad' and Description like '%çift sim kart%'
+----
 
+**ORDER BY kullanm -> sralama  asc -> küçükten büyüğe   desc -> büyükten küçüğe**
+[source, sql]
+----
+select * from ShopApp.Products order by Name
 ----
 
 [source, sql]
 ----
-
+select * from ShopApp.Products order by Price asc
 ----
 
 [source, sql]
 ----
-
+select * from ShopApp.Products order by Price desc
 ----
+
+Önce isme göre, sonra da aynı isimleri kendi aralarında fiyata göre küçükten büyüğe sıralar.
+[source, sql]
+----
+select * from ShopApp.Products order by Name, Price
+----
+
+Önce isme göre azalan bir şekilde, sonra da aynı isimleri kendi aralarında fiyata göre artan bir şekilde sıralar.
+[source, sql]
+----
+select * from ShopApp.Products order by Name desc ,Price asc
+----
+
+**LIMIT kullanımı**
+
+En ucuz telefonun ismini ve fiyatını verir.
+[source, sql]
+----
+select Name as Isim, Price as Fiyat from ShopApp.Products order by price limit 1
+----
+
+En ucuz 2 ürünün ismini ve fiyatını verir.
+[source, sql]
+----
+select Name as Isim, Price as Fiyat from ShopApp.Products order by price limit 2
+----
+
+En pahalı 3 ürünün ismini ve fiyatını verir.
+[source, sql]
+----
+select Name as Isim, Price as Fiyat from ShopApp.Products order by price desc limit 3
+----
+
+**SQL Fonksiyonları**
+
+Minimum fiyatı getirir.
+[source, sql]
+----
+select min(Price) as 'minimum fiyat' from ShopApp.Products
+----
+
+Maksimum fiyatı getirir.
+[source, sql]
+----
+select max(Price) as 'minimum fiyat' from ShopApp.Products
+----
+
+Alttaki iki sorgu da satır sayısını getirir.
+[source, sql]
+----
+select count(*) as 'minimum fiyat' from ShopApp.Products 
+----
+[source, sql]
+----
+select count(Price) as 'minimum fiyat' from ShopApp.Products 
+----
+
+Bütün ürünlerin fiyat ortalamasını verir.
+[source, sql]
+----
+select avg(Price) as 'fiyat ortalamasi' from ShopApp.Products
+----
+
+Bütün ürünlerin fiyat toplamını verir.
+[source, sql]
+----
+select sum(Price) as 'fiyat ortalamasi' from ShopApp.Products
+----
+
+Aynı üründen birden fazla varsa adet ile çarpmamız gerekir
+[source, sql]
+----
+select sum(Price*stok) as 'fiyat ortalamasi' from ShopApp.Products
+----
+
+**SQL String Fonksiyonlari**
+
+https://www.w3schools.com/sql/sql_ref_sqlserver.asp[SQL String Fonksiyonları] linkinden bütün fonksiyonlara bakılabilir.
 
 [source, sql]
 ----
