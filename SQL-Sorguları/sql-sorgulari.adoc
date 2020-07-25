@@ -406,11 +406,117 @@ Id = 1 olan satırın Name alanını Samsung s7 Plus olarak, Price alanını 280
 UPDATE  ShopApp.Products SET Name = 'Samsung s7 Plus', Price = 2800 where Id = 1
 ----
 
-Bütün fiyat alanlarına 1000 ekler.  Önemli: SET SQL_SAFE_UPDATES = 0;  Bu alanı eklemek zorundayız. Sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
+Bütün fiyat alanlarına 1000 ekler. **Önemli:** _SET SQL_SAFE_UPDATES = 0;_  Bu alanı eklemek zorundayız. Sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
 [source, sql]
 ----
-SET SQL_SAFE_UPDATES = 0;   -- Bu alanı eklemek zorundayız. sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
+SET SQL_SAFE_UPDATES = 0;   -- Bu alanı eklemek zorundayız. Sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
 UPDATE  ShopApp.Products SET Price = Price + 1000 
+----
+
+Category alanı bilgisayar olan bütün satırların Price alanına %10 ekler.
+[source, sql]
+----
+SET SQL_SAFE_UPDATES = 0;
+UPDATE  ShopApp.Products SET Price = Price * 1.1 where Category = 'bilgisayar'
+----
+
+ImageURL alanları null olan satırların ImageURL alanlarını noproduct olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET ImageURL = 'noproduct' where ImageURL IS NULL
+----
+
+ImageURL alanları null olmayan satırların ImageURL alanlarını product.jpg olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET ImageURL = 'product.jpg' where ImageURL IS NOT NULL
+----
+
+**DELETE FROM -> Kayıt silme**
+
+Products tablosundaki bütün kayıtları siler.
+[source, sql]
+----
+DELETE FROM ShopApp.Products
+----
+
+Id'si 1 olan kayıtları siler.
+[source, sql]
+----
+DELETE FROM ShopApp.Products where Id = 1
+----
+
+Fiyatı 4000'den büyük olan bütün kayıtları siler.
+[source, sql]
+----
+DELETE FROM ShopApp.Products where Price > 4000
+----
+
+Fiyatı 4000'den büyük olan ve bilgisayar kategorisinde yer alan bütün kayıtları siler.
+[source, sql]
+----
+DELETE FROM ShopApp.Products where Price > 4000 and Category = 'bilgisayar'
+----
+
+Description bölümü null olan ve bilgisayar kategorisinde yer alan bütün kayıtları siler.
+[source, sql]
+----
+DELETE FROM ShopApp.Products where Description IS null and Category = 'bilgisayar'
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
 ----
 
 [source, sql]
