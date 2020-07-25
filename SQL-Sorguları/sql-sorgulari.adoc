@@ -234,6 +234,146 @@ select sum(Price*stok) as 'fiyat ortalamasi' from ShopApp.Products
 
 https://www.w3schools.com/sql/sql_ref_sqlserver.asp[SQL String Fonksiyonları] linkinden bütün fonksiyonlara bakılabilir.
 
+Name kısmını ve name kısmına ait string karakter sayısını getirir.
+[source, sql]
+----
+select Name as isim, length(name) as 'karakter uzunluğu' from ShopApp.Products 
+----
+
+Name kısmını ve name kısmına ait ilk üç karakteri getirir.
+[source, sql]
+----
+select Name as isim, left(name,3) as 'karakterin ilk üç harfi' from ShopApp.Products 
+----
+
+Name kısmını ve name kısmına ait ilk üç karakteri arkasina ... ekleyerek getirir.
+[source, sql]
+----
+select Name as isim, concat(left(name,3), '...') as 'karakterin ilk üç harfi' from ShopApp.Products 
+----
+
+Name kısmını ve name kısmına ait son üç karakteri arkasina ... ekleyerek getirir.
+[source, sql]
+----
+select Name as isim, concat(right(name,3), '...') as 'karakterin ilk üç harfi' from ShopApp.Products
+----
+
+Bütün karakterleri küçük harf yapar.
+[source, sql]
+----
+select Name as isim, lower(name)  from ShopApp.Products
+----
+
+Bütün karakterleri büyük harf yapar.
+[source, sql]
+----
+select Name as isim, upper(name)  from ShopApp.Products
+----
+
+Name içindeki boşluk karakterlerini çizgi ile değiştirir.
+[source, sql]
+----
+select Name as isim, replace(name,' ','-')  from ShopApp.Products
+----
+
+Name içindeki bütün karakterleri küçük harfe dönüştürür, içindeki boşluk karakterlerini çizgi ile değiştirir.
+[source, sql]
+----
+select Name as isim, lower(replace(name,' ','-'))  from ShopApp.Products
+----
+
+trim fonksiyonu istenen alanın başındaki ve sonundaki boşlukları kaldırır.
+[source, sql]
+----
+select Name as isim, trim(Name)  from ShopApp.Products
+----
+
+ltrim (left trim) istenen alanın başındaki boşluklar kaldırır.
+[source, sql]
+----
+select Name as isim, ltrim(Name)  from ShopApp.Products
+----
+
+rtrim (right trim) istenen alanın sonundaki boşluklar kaldırır.
+[source, sql]
+----
+select Name as isim, rtrim(Name)  from ShopApp.Products
+----
+
+**DISTINCT -> Tekrarlardan soyutlama**
+
+Tekrarlardan arnmş halde Name bölümünü getirir.
+[source, sql]
+----
+select distinct Name as 'tekrarsiz isim' from ShopApp.Products
+----
+
+**GROUP BY -> Gruplama**
+
+_DISTINCT ten farkı gruplar ve fonksiyon işlemlerine olanak sağlar._
+
+
+Urun bölümüne göre gruplar.
+[source, sql]
+----
+select Urun from ShopApp.Products group by urun 
+----
+
+Urun bölümüne göre gruplar ve hangi üründen kaç tane var yazirir.
+[source, sql]
+----
+select Urun, Count(*) as 'kaç tane var' from ShopApp.Products group by urun
+----
+
+Ürün bölümüne göre gruplar ve hangi üründen toplam kaç paralık ürün var getirir.
+[source, sql]
+----
+select Urun, sum(Price) as 'kaç tane var' from ShopApp.Products group by urun 
+----
+
+Her ürüne ait fiyat ortalamasını getirir.
+[source, sql]
+----
+select Urun, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products group by urun
+----
+
+Fiyatı 3000 den fazla olan ürünlerin ortalama fiyatını verir.
+[source, sql]
+----
+select Urun, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products where Price > 3000 group by Urun
+----
+
+**HAVING Kullanımı**
+
+Grubpla ilgili toplama, ortalama vb. fonksiyonlar kullanılacaksa having keyword'ü kullanılır.
+
+Aynı kategoride birden fazla bulunan ürünlerden kaç tane olduğunu getirir.
+[source, sql]
+----
+select Urun, count(*) as 'kaç tane var' from ShopApp.Products group by urun having count(*) > 1 
+----
+
+**INSERT INTO -> Kayıt ekleme**
+
+İnsert işlemi yaparken dikkat edilmesi gereken not null olarak işaretlenmiş alanlara mutlaka değer girilmesi gerekir. otomatik eklenen alanları yazmıyoruz.
+
+Örnek INSERT INTO sorgusu 1:
+[source, sql]
+----
+INSERT INTO ShopApp.Products (Name, Price, ImageURL, Urun, Description) VALUES ("LG", 3500, "9.jpg", "tablet", "Orta seviye tablet.")
+----
+
+Örnek INSERT INTO sorgusu 2:
+[source, sql]
+----
+INSERT INTO ShopApp.Products (Name, Price, Urun) VALUES ("Lenovo", 3500, "bilgisayar")
+----
+
+[source, sql]
+----
+
+----
+
 [source, sql]
 ----
 
