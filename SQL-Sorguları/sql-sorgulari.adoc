@@ -67,30 +67,29 @@ select * from ShopApp.Products where NOT Name = 'samsung s5'
 ----
 
 **BETWEEN kullanımı**
+
+Fiyatı 2000 ile 4000 arasında olan ürünleri getirir. Uç rakamlar dahil.
 [source, sql]
 ----
-select * from ShopApp.Products where Price between 2000 and 4000 -- uç rakamlar dahil
+select * from ShopApp.Products where Price between 2000 and 4000 
 ----
 
+Id'si 1 ve 4 arasında olan ürünleri getirir. Uç rakamlar dahil.
 [source, sql]
 ----
-select * from ShopApp.Products where Price between 2000 and 4000 -- uç rakamlar dahil
-----
-
-[source, sql]
-----
-select * from ShopApp.Products where Id not between 1 and 4 -- uç rakamlar dahil
+select * from ShopApp.Products where Id not between 1 and 4
 ----
 
 **IN kullanımı**
+
 [source, sql]
 ----
-select * from ShopApp.Products where urun in ('tablet','bilgisayar')
+select * from ShopApp.Products where Category in ('tablet','bilgisayar')
 ----
 
 [source, sql]
 ----
-select * from ShopApp.Products where urun not in ('bilgisayar')
+select * from ShopApp.Products where Category not in ('bilgisayar')
 ----
 
 [source, sql]
@@ -100,57 +99,69 @@ select * from ShopApp.Products where Id not in (1,2)
 
 **LIKE kullanımı -> içinde bir kelime geçen**
 
+Başnda sonunda ne olduğu önemli değil içinde samsung geçsin.
 [source, sql]
 ----
-select * from ShopApp.Products where Name like  '%samsung%'       -- başnda sonunda ne olduğu önemli değil içinde samsung geçsin
+select * from ShopApp.Products where Name like  '%samsung%'
 ----
 
+Sonu d ile biten, başında ne olduğu önemli değil.
 [source, sql]
 ----
-select * from ShopApp.Products where Name like  '%d'              -- sonu d ile biten, başnda ne olduğu önemli değil
+select * from ShopApp.Products where Name like  '%d'
 ----
 
+ S ile başlayan kayıtlar, sonrasında ne olduğu önemli değil.
 [source, sql]
 ----
-select * from ShopApp.Products where Name like  'S%'              -- Sile başlayan kaytlar, sonrasnda ne olduğu önemli değil
+select * from ShopApp.Products where Name like  'S%'
 ----
 
+İkinci karakteri a olsun, birinci karakterin ne olduğu ve sonras önemli değil.
 [source, sql]
 ----
-select * from ShopApp.Products where Name like  '_a%'             -- ikinci karakteri a olsun, sonras önemli değil
+select * from ShopApp.Products where Name like  '_a%'
 ----
 
+S ile başlasın, ikinci karakter önemli değil, üçüncü karakter d olsun, sonrası önemli değil.
 [source, sql]
 ----
-select * from ShopApp.Products where Name like  'S_d%'            -- S ile başlasn, ikinci karakter önemli değil, üçüncü karakter d olsun, sonras önemli değil
+select * from ShopApp.Products where Name like  'S_d%'
 ----
 
+İçinde iphone geçmeyen sorgu gelir.
 [source, sql]
 ----
-select * from ShopApp.Products where Name not like  'ipad'           -- içinde iphone geçmeyen sorgu gelir
+select * from ShopApp.Products where Name not like  '%ipad%'
 ----
 
+İçinde iphone geçmeyen ve fiyatı 4000 den büyük olan sorgu gelir.
 [source, sql]
 ----
 select * from ShopApp.Products where Name not like  'ipad' and Price > 4000  
 ----
 
+İçinde iphone geçmeyen ve Description bölüünde çift sim kart geçen sorgu gelir.
 [source, sql]
 ----
 select * from ShopApp.Products where Name not like  'ipad' and Description like '%çift sim kart%'
 ----
 
 **ORDER BY kullanm -> sralama  asc -> küçükten büyüğe   desc -> büyükten küçüğe**
+
+Name alanına göre küçükten büyüğe sıralama sorgusu.
 [source, sql]
 ----
 select * from ShopApp.Products order by Name
 ----
 
+Price alanına göre küçükten büyüğe sıralama sorgusu.
 [source, sql]
 ----
 select * from ShopApp.Products order by Price asc
 ----
 
+Price alanına göre büyükten küçüğe sıralama sorgusu.
 [source, sql]
 ----
 select * from ShopApp.Products order by Price desc
@@ -285,19 +296,19 @@ select Name as isim, lower(replace(name,' ','-'))  from ShopApp.Products
 trim fonksiyonu istenen alanın başındaki ve sonundaki boşlukları kaldırır.
 [source, sql]
 ----
-select Name as isim, trim(Name)  from ShopApp.Products
+select Name as isim, trim(Name) from ShopApp.Products
 ----
 
 ltrim (left trim) istenen alanın başındaki boşluklar kaldırır.
 [source, sql]
 ----
-select Name as isim, ltrim(Name)  from ShopApp.Products
+select Name as isim, ltrim(Name) from ShopApp.Products
 ----
 
 rtrim (right trim) istenen alanın sonundaki boşluklar kaldırır.
 [source, sql]
 ----
-select Name as isim, rtrim(Name)  from ShopApp.Products
+select Name as isim, rtrim(Name) from ShopApp.Products
 ----
 
 **DISTINCT -> Tekrarlardan soyutlama**
@@ -313,34 +324,34 @@ select distinct Name as 'tekrarsiz isim' from ShopApp.Products
 _DISTINCT ten farkı gruplar ve fonksiyon işlemlerine olanak sağlar._
 
 
-Urun bölümüne göre gruplar.
+Category bölümüne göre gruplar.
 [source, sql]
 ----
-select Urun from ShopApp.Products group by urun 
+select Category from ShopApp.Products group by Category 
 ----
 
-Urun bölümüne göre gruplar ve hangi üründen kaç tane var yazirir.
+Category bölümüne göre gruplar ve hangi üründen kaç tane var yazirir.
 [source, sql]
 ----
-select Urun, Count(*) as 'kaç tane var' from ShopApp.Products group by urun
+select Category, Count(*) as 'kaç tane var' from ShopApp.Products group by Category
 ----
 
-Ürün bölümüne göre gruplar ve hangi üründen toplam kaç paralık ürün var getirir.
+Category bölümüne göre gruplar ve hangi üründen toplam kaç paralık ürün var getirir.
 [source, sql]
 ----
-select Urun, sum(Price) as 'kaç tane var' from ShopApp.Products group by urun 
+select Category, sum(Price) as 'kaç tane var' from ShopApp.Products group by Category 
 ----
 
 Her ürüne ait fiyat ortalamasını getirir.
 [source, sql]
 ----
-select Urun, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products group by urun
+select Category, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products group by Category
 ----
 
 Fiyatı 3000 den fazla olan ürünlerin ortalama fiyatını verir.
 [source, sql]
 ----
-select Urun, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products where Price > 3000 group by Urun
+select Category, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products where Price > 3000 group by Category
 ----
 
 **HAVING Kullanımı**
@@ -350,7 +361,7 @@ Grubpla ilgili toplama, ortalama vb. fonksiyonlar kullanılacaksa having keyword
 Aynı kategoride birden fazla bulunan ürünlerden kaç tane olduğunu getirir.
 [source, sql]
 ----
-select Urun, count(*) as 'kaç tane var' from ShopApp.Products group by urun having count(*) > 1 
+select Category, count(*) as 'kaç tane var' from ShopApp.Products group by Category having count(*) > 1 
 ----
 
 **INSERT INTO -> Kayıt ekleme**
@@ -360,13 +371,13 @@ select Urun, count(*) as 'kaç tane var' from ShopApp.Products group by urun hav
 Örnek INSERT INTO sorgusu 1:
 [source, sql]
 ----
-INSERT INTO ShopApp.Products (Name, Price, ImageURL, Urun, Description) VALUES ("LG", 3500, "9.jpg", "tablet", "Orta seviye tablet.")
+INSERT INTO ShopApp.Products (Name, Price, ImageURL, Category, Description) VALUES ("LG", 3500, "9.jpg", "tablet", "Orta seviye tablet.")
 ----
 
 Örnek INSERT INTO sorgusu 2:
 [source, sql]
 ----
-INSERT INTO ShopApp.Products (Name, Price, Urun) VALUES ("Lenovo", 3500, "bilgisayar")
+INSERT INTO ShopApp.Products (Name, Price, Category) VALUES ("Lenovo", 3500, "bilgisayar")
 ----
 
 [source, sql]
