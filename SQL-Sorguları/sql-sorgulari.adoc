@@ -356,7 +356,7 @@ select Category, avg(Price) as 'fiyat ortalamasi' from ShopApp.Products where Pr
 
 **HAVING Kullanımı**
 
-Grubpla ilgili toplama, ortalama vb. fonksiyonlar kullanılacaksa having keyword'ü kullanılır.
+Grupla ilgili toplama, ortalama vb. fonksiyonlar kullanılacaksa having keyword'ü kullanılır.
 
 Aynı kategoride birden fazla bulunan ürünlerden kaç tane olduğunu getirir.
 [source, sql]
@@ -379,6 +379,8 @@ INSERT INTO ShopApp.Products (Name, Price, ImageURL, Category, Description) VALU
 ----
 INSERT INTO ShopApp.Products (Name, Price, Category) VALUES ("Lenovo", 3500, "bilgisayar")
 ----
+
+**UPDATE -> Kayıt güncelleme**
 
 [source, sql]
 ----
