@@ -272,25 +272,25 @@ select Name as isim, concat(right(name,3), '...') as 'karakterin ilk üç harfi'
 Bütün karakterleri küçük harf yapar.
 [source, sql]
 ----
-select Name as isim, lower(name)  from ShopApp.Products
+select Name as isim, lower(name) from ShopApp.Products
 ----
 
 Bütün karakterleri büyük harf yapar.
 [source, sql]
 ----
-select Name as isim, upper(name)  from ShopApp.Products
+select Name as isim, upper(name) from ShopApp.Products
 ----
 
 Name içindeki boşluk karakterlerini çizgi ile değiştirir.
 [source, sql]
 ----
-select Name as isim, replace(name,' ','-')  from ShopApp.Products
+select Name as isim, replace(name,' ','-') from ShopApp.Products
 ----
 
 Name içindeki bütün karakterleri küçük harfe dönüştürür, içindeki boşluk karakterlerini çizgi ile değiştirir.
 [source, sql]
 ----
-select Name as isim, lower(replace(name,' ','-'))  from ShopApp.Products
+select Name as isim, lower(replace(name,' ','-')) from ShopApp.Products
 ----
 
 trim fonksiyonu istenen alanın başındaki ve sonundaki boşlukları kaldırır.
@@ -381,6 +381,52 @@ INSERT INTO ShopApp.Products (Name, Price, Category) VALUES ("Lenovo", 3500, "bi
 ----
 
 **UPDATE -> Kayıt güncelleme**
+
+Bütün Name alanlarını Samsung s7 olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET Name = 'Samsung s7'
+----
+
+Id = 1 olan satırın Name alanını Samsung s7 Plus olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET Name = 'Samsung s7 Plus' where Id = 1
+----
+
+Price alanı 3000 den büyük olan bütün satırların Name alanını Samsung s7 Plus olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET Name = 'Samsung s7 Plus' where Price > 3000
+----
+
+Id = 1 olan satırın Name alanını Samsung s7 Plus olarak, Price alanını 2800 olarak günceller.
+[source, sql]
+----
+UPDATE  ShopApp.Products SET Name = 'Samsung s7 Plus', Price = 2800 where Id = 1
+----
+
+Bütün fiyat alanlarına 1000 ekler.  Önemli: SET SQL_SAFE_UPDATES = 0;  Bu alanı eklemek zorundayız. Sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
+[source, sql]
+----
+SET SQL_SAFE_UPDATES = 0;   -- Bu alanı eklemek zorundayız. sorgudan birçok alan etkilendiği için bilerek yapıyorum diye bildirmemiz gerekiyor.
+UPDATE  ShopApp.Products SET Price = Price + 1000 
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
+
+[source, sql]
+----
+
+----
 
 [source, sql]
 ----
