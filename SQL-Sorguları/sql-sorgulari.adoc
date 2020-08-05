@@ -199,6 +199,16 @@ En pahalı 3 ürünün ismini ve fiyatını verir.
 select Name as Isim, Price as Fiyat from ShopApp.Products order by price desc limit 3
 ----
 
+**UNION Kullanımı**
+
+Fiyatı en düşük ve en yüksek ürün adını getirir.
+[source, sql]
+----
+(select Name from station order by Price limit 1)
+UNION
+(select Name from station order by Price desc limit 1)
+----
+
 **SQL Fonksiyonları**
 
 Minimum fiyatı getirir.
